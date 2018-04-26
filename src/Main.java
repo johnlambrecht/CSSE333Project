@@ -4,12 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import CarService.DatabaseConnectionService;
 
 public class Main {
 
@@ -18,8 +24,13 @@ public class Main {
 	// appRunner.runApplication(args);
 	// }
 
+	static String DBNAME;
+	
 	public static void main(String[] args) {
-
+		//Establish a connection with the database
+		DBNAME = "CarInventoryManagement";
+		DatabaseConnectionService dbService = new DatabaseConnectionService("golem.csse.rose-hulman.edu", DBNAME);
+		dbService.connect("carim", "carim123");
 		// the main frame
 		JFrame frame = new JFrame();
 		frame.setSize(1700, 750);
@@ -46,8 +57,21 @@ public class Main {
 		dataPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// creates the drop down box with an example set of strings
-		String[] dbNames = { "Car", "Person" };
-		JComboBox dbList = new JComboBox(dbNames);
+		ArrayList<String> dbNames = new ArrayList<String>();
+		Statement stmt = null;
+	    String query = "USE" + DBNAME +
+                " SELECT name FROM sys.tables";
+	    try {
+	        stmt = dbService.getConnection().createStatement();
+	        ResultSet rs = stmt.executeQuery(query);
+	        while (rs.next()) {
+	        	dbNames.add(rs.getString("name"));
+	        	
+	        }
+	    } catch (SQLException e ) {
+	    	e.printStackTrace();
+	    } 
+		JComboBox dbList = new JComboBox(dbNames.toArray());
 		buttonPanel.add(dbList);
 
 		// creates each individual button. will need to add listeners to make
