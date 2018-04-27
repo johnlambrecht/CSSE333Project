@@ -37,18 +37,6 @@ public class Main {
 		frame.setSize(1700, 750);
 		frame.setTitle("Car Inventory Management");
 
-		// these are the frames for the button pop ups
-		JFrame addFrame = new JFrame();
-		addFrame.setTitle("Add");
-		addFrame.setSize(1000, 500);
-
-		JFrame editFrame = new JFrame();
-		editFrame.setTitle("Edit");
-		editFrame.setSize(1000, 500);
-
-		JFrame deleteFrame = new JFrame();
-		deleteFrame.setTitle("Delete");
-		deleteFrame.setSize(1000, 500);
 
 		// a panel for our buttons
 		JPanel buttonPanel = new JPanel();
@@ -56,6 +44,8 @@ public class Main {
 		// a panel for the data
 		JPanel dataPanel = new JPanel();
 		dataPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		
+		
 		//test
 		// creates the drop down box with an example set of strings
 		ArrayList<String> dbNames = new ArrayList<String>();
@@ -81,39 +71,16 @@ public class Main {
 		JButton editButton = new JButton("Edit");
 		JButton deleteButton = new JButton("Delete");
 
-		// button listeners that set their respective frames visible
-		class AddListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				addFrame.setVisible(true);
-			}
-		}
-
-		class EditListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				editFrame.setVisible(true);
-			}
-		}
-
-		class DeleteListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				deleteFrame.setVisible(true);
-			}
-		}
-
+		
 		//adding the button listeners to their buttons
-		AddListener addListener = new AddListener();
+		ButtonListener addListener = new ButtonListener('a');
+		ButtonListener editListener = new ButtonListener('e');
+		ButtonListener deleteListener = new ButtonListener('d');
+		
 		addButton.addActionListener(addListener);
 		
-		EditListener editListener = new EditListener();
 		editButton.addActionListener(editListener);
 		
-		DeleteListener deleteListener = new DeleteListener();
 		deleteButton.addActionListener(deleteListener);
 		
 		// puts the buttons on the buttonPanel
