@@ -5,16 +5,19 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 import CarService.DatabaseConnectionService;
 
@@ -27,7 +30,7 @@ public class Main {
 
 	static String DBNAME;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		//Establish a connection with the database
 		DBNAME = "CarInventroyManagement";
 		DatabaseConnectionService dbService = new DatabaseConnectionService("golem.csse.rose-hulman.edu", DBNAME);
@@ -78,9 +81,7 @@ public class Main {
 		ButtonListener deleteListener = new ButtonListener('d');
 		
 		addButton.addActionListener(addListener);
-		
 		editButton.addActionListener(editListener);
-		
 		deleteButton.addActionListener(deleteListener);
 		
 		// puts the buttons on the buttonPanel
@@ -92,8 +93,38 @@ public class Main {
 		frame.add(buttonPanel, BorderLayout.EAST);
 		frame.add(dataPanel, BorderLayout.CENTER);
 
-		frame.setVisible(true);
+		
+		
+		
+		
+			
+			PreparedStatement psmt = dbService.getConnection().prepareStatement("SELECT * FROM CAR");
+			ResultSet rs = psmt.executeQuery();
 
+			// get column names
+			int len = rs.getMetaData().getColumnCount();
+			Vector cols= new Vector(len);
+			for(int i=1; i<=len; i++) // Note starting at 1
+			    cols.add(rs.getMetaData().getColumnName(i));
+
+
+			// Add Data
+			Vector data = new Vector();
+			while(rs.next())
+			{
+			    Vector row = new Vector(len);
+			    for(int i=1; i<=len; i++)
+			    {
+			        row.add(rs.getString(i));
+			    }
+			    data.add(row);
+			}
+
+			// Now create the table
+			JTable table = new JTable(data, cols);
+			dataPanel.add(table);
+			frame.setVisible(true);
 	}
+	
 
 }
