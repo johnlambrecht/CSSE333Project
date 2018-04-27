@@ -55,7 +55,7 @@ public class Main {
 		// a panel for the data
 		JPanel dataPanel = new JPanel();
 		dataPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+		//test
 		// creates the drop down box with an example set of strings
 		ArrayList<String> dbNames = new ArrayList<String>();
 		Statement stmt = null;
