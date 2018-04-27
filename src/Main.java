@@ -2,6 +2,7 @@
 //import sodabase.ui.ApplicationRunner;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -72,7 +73,7 @@ public class Main {
 	    	e.printStackTrace();
 	    } 
 		JComboBox dbList = new JComboBox(dbNames.toArray());
-		buttonPanel.add(dbList);
+		buttonPanel.add(dbList, BorderLayout.SOUTH);
 
 		// creates each individual button. will need to add listeners to make
 		// the buttons work
