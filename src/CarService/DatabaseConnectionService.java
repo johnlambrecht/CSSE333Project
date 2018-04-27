@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DatabaseConnectionService {
 
 	//DO NOT EDIT THIS STRING, YOU WILL RECEIVE NO CREDIT FOR THIS TASK IF THIS STRING IS EDITED
-	private final String SampleURL = "jdbc:sqlserver://${dbServer}:1433;databaseName=${dbName};user=${user};password={${pass}}";
+	private final String SampleURL = "jdbc:sqlserver://${dbServer};databaseName=${dbName};user=${user};password={${pass}}";
 
 	private Connection connection = null;
 

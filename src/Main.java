@@ -28,7 +28,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		//Establish a connection with the database
-		DBNAME = "CarInventoryManagement";
+		DBNAME = "CarInventroyManagement";
 		DatabaseConnectionService dbService = new DatabaseConnectionService("golem.csse.rose-hulman.edu", DBNAME);
 		dbService.connect("carim", "carim123");
 		// the main frame
@@ -59,7 +59,7 @@ public class Main {
 		// creates the drop down box with an example set of strings
 		ArrayList<String> dbNames = new ArrayList<String>();
 		Statement stmt = null;
-	    String query = "USE" + DBNAME +
+	    String query = "USE " + DBNAME +
                 " SELECT name FROM sys.tables";
 	    try {
 	        stmt = dbService.getConnection().createStatement();
