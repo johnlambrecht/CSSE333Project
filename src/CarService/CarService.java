@@ -14,7 +14,7 @@ public class CarService {
 		this.dbService = dbService;
 	}
 	
-	public int addCar() {
+	public int add() {
 		
 			CallableStatement cs = null;
 			
