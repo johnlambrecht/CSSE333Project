@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import CarService.DatabaseConnectionService;
@@ -89,10 +90,7 @@ public class Main {
 		buttonPanel.add(deleteButton, BorderLayout.CENTER);
 		buttonPanel.add(editButton, BorderLayout.SOUTH);
 
-		// puts all the buttons on the left of the frame
-		frame.add(buttonPanel, BorderLayout.EAST);
-		frame.add(dataPanel, BorderLayout.CENTER);
-
+		
 		
 		
 		
@@ -122,7 +120,16 @@ public class Main {
 
 			// Now create the table
 			JTable table = new JTable(data, cols);
-			dataPanel.add(table);
+			table.setFillsViewportHeight(true);
+			JScrollPane scrollTable = new JScrollPane(table);
+			scrollTable.setSize(1000, 750);;
+			dataPanel.add(scrollTable, BorderLayout.CENTER);
+			
+			
+			// puts all the buttons on the left of the frame
+			frame.add(buttonPanel, BorderLayout.EAST);
+			frame.add(dataPanel, BorderLayout.CENTER);
+
 			frame.setVisible(true);
 	}
 	
