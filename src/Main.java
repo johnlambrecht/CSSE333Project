@@ -48,6 +48,7 @@ public class Main {
 		// a panel for the data
 		JPanel dataPanel = new JPanel();
 		dataPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		dataPanel.setLayout(new BorderLayout());
 		
 		
 		//test
@@ -96,7 +97,7 @@ public class Main {
 		
 		
 			
-			PreparedStatement psmt = dbService.getConnection().prepareStatement("SELECT * FROM CAR");
+			PreparedStatement psmt = dbService.getConnection().prepareStatement("SELECT * FROM " + dbNames.get(dbList.getSelectedIndex()));
 			ResultSet rs = psmt.executeQuery();
 
 			// get column names
