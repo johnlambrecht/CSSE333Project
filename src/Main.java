@@ -2,9 +2,6 @@
 //import sodabase.ui.ApplicationRunner;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -124,7 +121,7 @@ public class Main {
 			JTable table = new JTable(data, cols);
 			table.setFillsViewportHeight(true);
 			JScrollPane scrollTable = new JScrollPane(table);
-			scrollTable.setSize(1000, 750);;
+			scrollTable.setSize(1000, 750);
 			dataPanel.add(scrollTable, BorderLayout.CENTER);
 			
 			
