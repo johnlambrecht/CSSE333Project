@@ -89,7 +89,7 @@ public class Main {
 		
 		
 		
-		dbList.addActionListener(new DropDownListener(dbService, dbNames, dbList, dataPanel));
+		dbList.addActionListener(new DropDownListener(dbService, dbList, dataPanel));
 		
 		    
 		

@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
@@ -16,13 +15,11 @@ import CarService.DatabaseConnectionService;
 
 public class DropDownListener implements ActionListener {
     DatabaseConnectionService dbService;
-    ArrayList<String> dbNames;
     JComboBox dbList;
     JPanel dataPanel;
 
-    public DropDownListener(DatabaseConnectionService dbService, ArrayList<String> dbNames, JComboBox dbList, JPanel dataPanel) {
+    public DropDownListener(DatabaseConnectionService dbService, JComboBox dbList, JPanel dataPanel) {
         this.dbService = dbService;
-        this.dbNames = dbNames;
         this.dbList = dbList;
         this.dataPanel = dataPanel;
         
@@ -38,7 +35,7 @@ public class DropDownListener implements ActionListener {
         
         PreparedStatement psmt = null;
 		try {
-			psmt = this.dbService.getConnection().prepareStatement("SELECT * FROM " + tableName);
+			psmt = this.dbService.getConnection().prepareStatement("SELECT * FROM [" +  tableName + "]");
 		} catch (SQLException exception) {
 			// TODO Auto-generated catch-block stub.
 			exception.printStackTrace();
