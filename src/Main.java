@@ -2,16 +2,20 @@
 //import sodabase.ui.ApplicationRunner;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import CarService.DatabaseConnectionService;
 
@@ -94,34 +98,34 @@ public class Main {
 		    
 		
 			
-//			PreparedStatement psmt = dbService.getConnection().prepareStatement("SELECT * FROM " + dbNames.get(dbList.getSelectedIndex()));
-//			ResultSet rs = psmt.executeQuery();
-//
-//			// get column names
-//			int len = rs.getMetaData().getColumnCount();
-//			Vector cols= new Vector(len);
-//			for(int i=1; i<=len; i++) // Note starting at 1
-//			    cols.add(rs.getMetaData().getColumnName(i));
-//
-//
-//			// Add Data
-//			Vector data = new Vector();
-//			while(rs.next())
-//			{
-//			    Vector row = new Vector(len);
-//			    for(int i=1; i<=len; i++)
-//			    {
-//			        row.add(rs.getString(i));
-//			    }
-//			    data.add(row);
-//			}
-//
-//			// Now create the table
-//			JTable table = new JTable(data, cols);
-//			table.setFillsViewportHeight(true);
-//			JScrollPane scrollTable = new JScrollPane(table);
-//			scrollTable.setSize(1000, 750);
-//			dataPanel.add(scrollTable, BorderLayout.CENTER);
+			PreparedStatement psmt = dbService.getConnection().prepareStatement("SELECT * FROM " + dbNames.get(dbList.getSelectedIndex()));
+			ResultSet rs = psmt.executeQuery();
+
+			// get column names
+			int len = rs.getMetaData().getColumnCount();
+			Vector cols= new Vector(len);
+			for(int i=1; i<=len; i++) // Note starting at 1
+			    cols.add(rs.getMetaData().getColumnName(i));
+
+
+			// Add Data
+			Vector data = new Vector();
+			while(rs.next())
+			{
+			    Vector row = new Vector(len);
+			    for(int i=1; i<=len; i++)
+			    {
+			        row.add(rs.getString(i));
+			    }
+			    data.add(row);
+			}
+
+			// Now create the table
+			JTable table = new JTable(data, cols);
+			table.setFillsViewportHeight(true);
+			JScrollPane scrollTable = new JScrollPane(table);
+			scrollTable.setSize(1000, 750);
+			dataPanel.add(scrollTable, BorderLayout.CENTER);
 			
 			
 			// puts all the buttons on the left of the frame
