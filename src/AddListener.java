@@ -34,6 +34,8 @@ public class AddListener implements ActionListener{
 		switch(this.dbName) {
 		case "Car":
 			System.out.println("In add car");
+			AddCarListener addCar = new AddCarListener(addFrame);
+			//addFrame.add(arg0)
 			CarService car = new CarService(dbService);
 			car.populateFrame(addFrame);
 			break;
