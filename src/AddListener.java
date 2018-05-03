@@ -3,8 +3,10 @@ import java.awt.event.ActionListener;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,12 +22,14 @@ import CarService.TransactsService;
 
 public class AddListener implements ActionListener{
 	DatabaseConnectionService dbService;
-	String dbName;
+	ArrayList<String> dbNames;
+	JComboBox dbList;
 
 	
-	public AddListener(DatabaseConnectionService dbService, String dbName) {
+	public AddListener(DatabaseConnectionService dbService, ArrayList<String>dbNames, JComboBox dbList) {
 		this.dbService = dbService;
-		this.dbName = dbName;
+		this.dbNames = dbNames;
+		this.dbList = dbList;
 		
 	}
 	@Override
@@ -34,7 +38,7 @@ public class AddListener implements ActionListener{
 		JFrame addFrame = new JFrame();
 		addFrame.setSize(1000, 500);
 		//JPanel panel = new JPanel();
-		switch(this.dbName) {
+		switch(this.dbNames.get(dbList.getSelectedIndex())) {
 		case "Car":
 			System.out.println("In add car");
 			CarService car = new CarService(dbService);
@@ -43,6 +47,7 @@ public class AddListener implements ActionListener{
 		case "Manufacturer":
 			//addFrame.setTitle("Add Manufacturer");
 			ManufacturerService manf = new ManufacturerService(dbService);
+			manf.populateFrame();
 			
 			break;
 		case "Dealership":
@@ -51,12 +56,14 @@ public class AddListener implements ActionListener{
 			deal.populateFrame();
 			break;
 		case "Transacts":
-			addFrame.setTitle("Add Transacts");
+			//addFrame.setTitle("Add Transacts");
 			TransactsService trans = new TransactsService(dbService);
+			trans.populateFrame();
 			break;
 		case "Membership":
-			addFrame.setTitle("Add Membership");
+			//addFrame.setTitle("Add Membership");
 			MembershipService memb = new MembershipService(dbService);
+			memb.populateFrame();
 			break;
 		}
 	}

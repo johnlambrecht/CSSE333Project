@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,11 +18,13 @@ public class DropDownListener implements ActionListener {
     DatabaseConnectionService dbService;
     JComboBox dbList;
     JPanel dataPanel;
+    
 
     public DropDownListener(DatabaseConnectionService dbService, JComboBox dbList, JPanel dataPanel) {
         this.dbService = dbService;
         this.dbList = dbList;
         this.dataPanel = dataPanel;
+       
         
         
     }
@@ -88,6 +91,7 @@ public class DropDownListener implements ActionListener {
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollTable = new JScrollPane(table);
 		scrollTable.setSize(1000, 750);
+		
 		dataPanel.removeAll();
 		dataPanel.add(scrollTable, BorderLayout.CENTER);
 		dataPanel.revalidate();
