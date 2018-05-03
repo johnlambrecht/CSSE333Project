@@ -132,4 +132,19 @@ public class CarService {
 			}
 		return 1;
 	}
+	
+	public int delete() {
+		
+		return 1;
+	}
+	
+	public void populateDeleteFrame(JFrame frame) {
+		JPanel panel = new JPanel();
+		GridLayout layout = new GridLayout(2,1);
+		panel.setLayout(layout);
+		frame.setSize(1000, 500);
+		frame.setTitle("Add Car");
+		JTextField jVIN = new JTextField("      VIN");
+		panel.add(jVIN);
+	}
 }
