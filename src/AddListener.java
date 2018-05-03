@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import CarService.CarService;
+import CarService.CustomerService;
 import CarService.DatabaseConnectionService;
 import CarService.DealershipService;
 import CarService.ManufacturerService;
@@ -64,6 +65,10 @@ public class AddListener implements ActionListener{
 			//addFrame.setTitle("Add Membership");
 			MembershipService memb = new MembershipService(dbService);
 			memb.populateFrame();
+			break;
+		case "Customer":
+			CustomerService cust = new CustomerService(dbService);
+			cust.populateFrame();
 			break;
 		}
 	}
