@@ -60,9 +60,17 @@ public class TransactsService {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int sellP = Integer.parseInt(jSellP.getText());
+					
+					int sellP = 0;
+					if(!jSellP.getText().equals("Sell Price")){
+						sellP = Integer.parseInt(jSellP.getText());
+					}
+					
 					String salesPerson = jSalesPerson.getText();
-					String date = jDate.getText();
+					String date = null;
+					if(!jDate.getText().equals("Date")){
+					date = jDate.getText();
+					}
 					String car = jCar.getText();
 					String customer = jCustomer.getText();
 					
