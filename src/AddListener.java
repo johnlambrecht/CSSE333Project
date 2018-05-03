@@ -34,18 +34,18 @@ public class AddListener implements ActionListener{
 		switch(this.dbName) {
 		case "Car":
 			System.out.println("In add car");
-			AddCarListener addCar = new AddCarListener(addFrame);
-			//addFrame.add(arg0)
 			CarService car = new CarService(dbService);
-			car.populateFrame(addFrame);
+			car.populateFrame();
 			break;
 		case "Manufacturer":
 			addFrame.setTitle("Add Manufacturer");
 			ManufacturerService manf = new ManufacturerService(dbService);
+			
 			break;
 		case "Dealership":
 			addFrame.setTitle("Add Dealership");
 			DealershipService deal = new DealershipService(dbService);
+			deal.populateFrame();
 			break;
 		case "Transacts":
 			addFrame.setTitle("Add Transacts");

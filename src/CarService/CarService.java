@@ -1,10 +1,15 @@
 package CarService;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,55 +24,86 @@ public class CarService {
 		this.dbService = dbService;
 	}
 	
-	public void populateFrame(JFrame frame) {
+	public void populateFrame() {
+		JFrame frame = new JFrame();
 		System.out.println("working with frame");
 		JPanel panel = new JPanel();
-		GroupLayout layout = new GroupLayout(panel);
+		GridLayout layout = new GridLayout(7,1);
 		panel.setLayout(layout);
-		layout.setAutoCreateGaps(true);
-		layout.setAutoCreateContainerGaps(true);
-		
+		frame.setSize(1000, 500);
 		frame.setTitle("Add Car");
-		JLabel lVin = new JLabel();
-		lVin.setText("VIN");
-		JTextField jVIN = new JTextField();
-		String VIN = "";
+		//JLabel lVin = new JLabel();
+		//lVin.setText("VIN");
+		JTextField jVIN = new JTextField("      VIN      ");
+		//panel.add(lVin);
+		panel.add(jVIN);
 		
-		JLabel lColor = new JLabel();
-		JTextField jColor = new JTextField();
-		String color = "";
 		
-		JLabel lModel = new JLabel();
-		JTextField jModel = new JTextField();
-		String model = "";
+		//JLabel lColor = new JLabel();
+		//lColor.setText("Color");
+		JTextField jColor = new JTextField("     Color     ");
+		//panel.add(lColor);
+		panel.add(jColor);
 		
-		JLabel lMileage = new JLabel();
-		JTextField jMileage = new JTextField();
-		String mileage = "";
+		//JLabel lModel = new JLabel();
+		JTextField jModel = new JTextField("     Model     ");
+		//panel.add(lModel);
+		panel.add(jModel);
 		
-		JLabel lMSRP = new JLabel();
-		JTextField jMSRP = new JTextField();
-		String msrp = "";
+		//JLabel lMileage = new JLabel();
+		JTextField jMileage = new JTextField("    Mileage    ");
+		//panel.add(lMileage);
+		panel.add(jMileage);
 		
-		JLabel lManf = new JLabel();
-		JTextField jmanf = new JTextField();
-		String manf = "";
+		//JLabel lMSRP = new JLabel();
+		JTextField jMSRP = new JTextField("    MSRP    ");
+		//panel.add(lMSRP);
+		panel.add(jMSRP);
 		
-		JLabel lAvail = new JLabel();
-		JTextField jAvail = new JTextField();
-		String avail = "";
+		//JLabel lManf = new JLabel();
+		JTextField jmanf = new JTextField(" Manufacturer ");
+		//panel.add(lManf);
+		panel.add(jmanf);
 		
-		layout.setHorizontalGroup(layout.createSequentialGroup()
-										.addComponent(lVin)
-										.addComponent(jVIN));
+		//JLabel lAvail = new JLabel();
+		JTextField jAvail = new JTextField(" Availability ");
+		//panel.add(lAvail);
+		panel.add(jAvail);
+
+		
+		JButton doneButton = new JButton("DONE");
+		
+	
+		
+		class DoneListener implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String VIN = jVIN.getText();
+				String color = jColor.getText();
+				String model = jModel.getText();
+				float mileage = Float.parseFloat(jMileage.getText());
+				int msrp = Integer.parseInt(jMSRP.getText());
+				String manf = jmanf.getText();
+				String avail = jAvail.getText();
+				
+				add(VIN,color,model,mileage,msrp,manf,avail);
+			}
+			
+		}
+		DoneListener doneListener = new DoneListener();
+		doneButton.addActionListener(doneListener);
+		panel.add(doneButton);
+		frame.add(panel);
 		frame.setVisible(true);
 	}
+	
 	public int add(String VIN, String color, String model, float mileage, int msrp, String manf, String avail) {
 		
 			CallableStatement cs = null;
 			
 			try {
-				cs = this.dbService.getConnection().prepareCall("{ ? = call newCar(?,?,?,?,?,?,?)}" );
+				cs = this.dbService.getConnection().prepareCall("{ ? = call addCar(?,?,?,?,?,?,?)}" );
 				cs.registerOutParameter(1, Types.INTEGER);
 				cs.setString(2, VIN);
 				cs.setString(3, color);
@@ -93,7 +129,6 @@ public class CarService {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-//				JOptionPane.showMessageDialog(null, "Add Restaurant not implemented.");
 			}
 		return 1;
 	}

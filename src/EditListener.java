@@ -27,7 +27,6 @@ public class EditListener implements ActionListener{
 				addFrame.setVisible(true);
 				switch(this.dbName) {
 				case "Car":
-					
 					CarService car = new CarService(dbService);
 					break;
 				case "Manufacturer":
