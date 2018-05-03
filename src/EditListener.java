@@ -28,6 +28,7 @@ public class EditListener implements ActionListener{
 				switch(this.dbName) {
 				case "Car":
 					CarService car = new CarService(dbService);
+					car.populateFrame();
 					break;
 				case "Manufacturer":
 					ManufacturerService manf = new ManufacturerService(dbService);

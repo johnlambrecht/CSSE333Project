@@ -21,16 +21,19 @@ import CarService.TransactsService;
 public class AddListener implements ActionListener{
 	DatabaseConnectionService dbService;
 	String dbName;
+
 	
 	public AddListener(DatabaseConnectionService dbService, String dbName) {
 		this.dbService = dbService;
 		this.dbName = dbName;
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		JFrame addFrame = new JFrame();
 		addFrame.setSize(1000, 500);
+		//JPanel panel = new JPanel();
 		switch(this.dbName) {
 		case "Car":
 			System.out.println("In add car");
@@ -38,12 +41,12 @@ public class AddListener implements ActionListener{
 			car.populateFrame();
 			break;
 		case "Manufacturer":
-			addFrame.setTitle("Add Manufacturer");
+			//addFrame.setTitle("Add Manufacturer");
 			ManufacturerService manf = new ManufacturerService(dbService);
 			
 			break;
 		case "Dealership":
-			addFrame.setTitle("Add Dealership");
+			//addFrame.setTitle("Add Dealership");
 			DealershipService deal = new DealershipService(dbService);
 			deal.populateFrame();
 			break;
