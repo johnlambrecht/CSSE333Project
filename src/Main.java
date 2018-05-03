@@ -78,7 +78,7 @@ public class Main {
 //		ButtonListener addListener = new ButtonListener('a');
 		AddListener addListener = new AddListener(dbService, dbNames.get(dbList.getSelectedIndex()));
 		EditListener editListener = new EditListener(dbService, dbNames.get(dbList.getSelectedIndex()));
-		ButtonListener deleteListener = new ButtonListener('d');
+		DeleteListener deleteListener = new DeleteListener(dbService, dbNames.get(dbList.getSelectedIndex()));
 		
 		addButton.addActionListener(addListener);
 		editButton.addActionListener(editListener);
