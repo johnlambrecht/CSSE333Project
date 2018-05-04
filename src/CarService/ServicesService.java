@@ -13,11 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MembershipService {
+public class ServicesService {
 
 	DatabaseConnectionService dbService;
 	
-	public MembershipService(DatabaseConnectionService dbService2) {
+	public ServicesService(DatabaseConnectionService dbService2) {
 		this.dbService = dbService2;
 	}
 	public void populateFrame() {
@@ -27,17 +27,20 @@ public class MembershipService {
 		GridLayout layout = new GridLayout(2,1);
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
-		frame.setTitle("Add Membership");
+		frame.setTitle("Add Service");
 		
 		
-		JTextField jCust = new JTextField("CustomerID");
-		panel.add(jCust);
-		
-		JTextField jManf = new JTextField("Manufacturer");
-		panel.add(jManf);
+		JTextField jVIN = new JTextField("VIN");
+		panel.add(jVIN);
 		
 		JTextField jName = new JTextField("Name");
 		panel.add(jName);
+		
+		JTextField jAddress = new JTextField("Address");
+		panel.add(jAddress);
+		
+		JTextField jDate = new JTextField("Date");
+		panel.add(jDate);
 		
 		JTextField jType = new JTextField("Type");
 		panel.add(jType);
@@ -51,12 +54,7 @@ public class MembershipService {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				int cust = 0;
-				if(!jCust.getText().equals("CustomerID")){
-				 cust = Integer.parseInt(jCust.getText());
-				}
-				String manf = jManf.getText();
-				
+				String vin = jVIN.getText();
 				
 				
 				String name = null;
@@ -64,13 +62,25 @@ public class MembershipService {
 				name = jName.getText();
 				}
 				
+				
+				String address = null;
+				if(!jAddress.getText().equals("Address")){
+				address = jAddress.getText();
+				}
+				
+				String date = null;
+				if(!jDate.getText().equals("Date")){
+				date = jDate.getText();
+				}
+				
 				String type = null;
 				if(!jType.getText().equals("Type")){
 				type = jType.getText();
 				}
 				
-				add(name, type, cust,manf);
-				frame.setVisible(false);
+				
+				
+				add(vin,name,address,date,type);
 			}
 			
 		}
@@ -82,21 +92,34 @@ public class MembershipService {
 	
 }
 
-	public int add(String name, String type, int customerID, String manf) {
+	public int add(String VIN, String name, String address, String date, String type) {
 		
 		CallableStatement cs = null;
 		
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call addMembership(?,?,?,?)}" );
+			cs = this.dbService.getConnection().prepareCall("{ ? = call addService(?,?,?,?,?)}" );
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, name);
-			cs.setString(3, type);
-			cs.setInt(4, customerID);
-			cs.setString(5,manf);
+			cs.setString(2, VIN);
+			cs.setString(3, name);
+			cs.setString(4, address);
+			cs.setString(5,date);
+			cs.setString(6, type);
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if(returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR");
+				JOptionPane.showMessageDialog(null, "ERROR: Must Enter a valid VIN");
+				return 0;
+			}else if(returnValue == 2) {
+				JOptionPane.showMessageDialog(null, "ERROR: Must Enter a valid Name");
+				return 0;
+			}else if(returnValue == 3) {
+				JOptionPane.showMessageDialog(null, "ERROR: Must Enter a valid Address");
+				return 0;
+			}else if(returnValue == 4) {
+				JOptionPane.showMessageDialog(null, "ERROR: The VIN is not valid");
+				return 0;
+			}else if(returnValue == 5) {
+				JOptionPane.showMessageDialog(null, "ERROR: The Name or the Address is not valid");
 				return 0;
 			}
 		} catch (SQLException e) {

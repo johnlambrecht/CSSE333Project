@@ -75,6 +75,7 @@ public class TransactsService {
 					String customer = jCustomer.getText();
 					
 					add(salesPerson,sellP,date,car,customer);
+					frame.setVisible(false);
 				}
 				
 			}

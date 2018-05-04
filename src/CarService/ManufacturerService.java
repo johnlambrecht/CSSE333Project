@@ -46,6 +46,7 @@ public class ManufacturerService {
 					
 					
 					add(name);
+					frame.setVisible(false);
 				}
 				
 			}

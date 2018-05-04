@@ -76,11 +76,13 @@ public class Main {
 		
 		//adding the button listeners to their buttons
 //		ButtonListener addListener = new ButtonListener('a');
-		AddListener addListener = new AddListener(dbService, dbNames.get(dbList.getSelectedIndex()));
+		
 		EditListener editListener = new EditListener(dbService, dbNames.get(dbList.getSelectedIndex()));
 		DeleteListener deleteListener = new DeleteListener(dbService, dbNames.get(dbList.getSelectedIndex()));
-		
+		//AddListener addListener = new AddListener(dbService, dbNames.get(dbList.getSelectedIndex()));
+		AddListener addListener = new AddListener(dbService, dbNames,dbList);
 		addButton.addActionListener(addListener);
+		
 		editButton.addActionListener(editListener);
 		deleteButton.addActionListener(deleteListener);
 		
@@ -100,7 +102,7 @@ public class Main {
 			
 			PreparedStatement psmt = dbService.getConnection().prepareStatement("SELECT * FROM " + dbNames.get(dbList.getSelectedIndex()));
 			ResultSet rs = psmt.executeQuery();
-
+			
 			// get column names
 			int len = rs.getMetaData().getColumnCount();
 			Vector cols= new Vector(len);

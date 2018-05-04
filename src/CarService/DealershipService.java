@@ -50,6 +50,7 @@ public class DealershipService {
 					
 					
 					add(name,address);
+					frame.setVisible(false);
 				}
 				
 			}
@@ -71,11 +72,6 @@ public class DealershipService {
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, name);
 			cs.setString(3, address);
-//			cs.setString(4, "tempaa");
-//			cs.setFloat(5, 15);
-//			cs.setInt(6, 15);
-//			cs.setString(7, "BMW");
-//			cs.setString(8, "Y");
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if(returnValue == 1) {

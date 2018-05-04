@@ -103,6 +103,7 @@ public class CarService {
 				avail = jAvail.getText();
 
 				add(VIN, color, model, mileage, msrp, manf, avail, frame);
+				frame.setVisible(false);
 			}
 
 		}
