@@ -22,30 +22,30 @@ public class DeleteListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		JFrame addFrame = new JFrame();
-		addFrame.setSize(1000, 500);
+		JFrame frame = new JFrame();
+		frame.setSize(1000, 500);
 		switch(this.dbName) {
 		case "Car":
 			System.out.println("In add car");
 			CarService car = new CarService(dbService);
-			car.populateFrame();
+			car.populateDeleteFrame(frame);
 			break;
 		case "Manufacturer":
-			addFrame.setTitle("Add Manufacturer");
+			frame.setTitle("Add Manufacturer");
 			ManufacturerService manf = new ManufacturerService(dbService);
 			
 			break;
 		case "Dealership":
-			addFrame.setTitle("Add Dealership");
+			frame.setTitle("Add Dealership");
 			DealershipService deal = new DealershipService(dbService);
 			deal.populateFrame();
 			break;
 		case "Transacts":
-			addFrame.setTitle("Add Transacts");
+			frame.setTitle("Add Transacts");
 			TransactsService trans = new TransactsService(dbService);
 			break;
 		case "Membership":
-			addFrame.setTitle("Add Membership");
+			frame.setTitle("Add Membership");
 			MembershipService memb = new MembershipService(dbService);
 			break;
 		}

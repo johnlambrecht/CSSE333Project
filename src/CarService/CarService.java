@@ -152,18 +152,36 @@ public class CarService {
 		return 1;
 	}
 	
-	public int delete() {
+	public int delete(String VIN) {
 		
 		return 1;
 	}
 	
 	public void populateDeleteFrame(JFrame frame) {
 		JPanel panel = new JPanel();
-		GridLayout layout = new GridLayout(2,1);
+		GridLayout layout = new GridLayout(2,2);
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
 		frame.setTitle("Add Car");
-		JTextField jVIN = new JTextField("      VIN");
+		JLabel jVIN = new JLabel(" VIN");
 		panel.add(jVIN);
+		JTextField tfVIN = new JTextField("hey");
+		JButton doneButton = new JButton("DONE");
+
+		class DoneListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				String VIN = tfVIN.getText();
+				delete(VIN);
+			}
+
+		}
+		DoneListener doneListener = new DoneListener();
+		doneButton.addActionListener(doneListener);
+		panel.add(doneButton);
+		frame.add(panel);
+		frame.setVisible(true);
 	}
 }
