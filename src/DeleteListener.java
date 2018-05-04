@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import CarService.CarService;
@@ -12,41 +14,44 @@ import CarService.TransactsService;
 
 public class DeleteListener implements ActionListener {
 	DatabaseConnectionService dbService;
-	String dbName;
+	ArrayList<String> dbNames;
+	JComboBox dbList;
 
-	public DeleteListener(DatabaseConnectionService dbService, String dbName) {
+	public DeleteListener(DatabaseConnectionService dbService, ArrayList<String>dbNames, JComboBox dbList) {
 		this.dbService = dbService;
-		this.dbName = dbName;
-
+		this.dbNames = dbNames;
+		this.dbList = dbList;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JFrame frame = new JFrame();
 		frame.setSize(1000, 500);
-		switch(this.dbName) {
+		switch(this.dbNames.get(dbList.getSelectedIndex())) {
 		case "Car":
-			System.out.println("In add car");
+			frame.setTitle("Delete Car");
 			CarService car = new CarService(dbService);
 			car.populateDeleteFrame(frame);
 			break;
 		case "Manufacturer":
-			frame.setTitle("Add Manufacturer");
+			frame.setTitle("Delete Manufacturer");
 			ManufacturerService manf = new ManufacturerService(dbService);
-			
+			manf.populateDeleteFrame(frame);
 			break;
 		case "Dealership":
-			frame.setTitle("Add Dealership");
+			frame.setTitle("Delete Dealership");
 			DealershipService deal = new DealershipService(dbService);
-			deal.populateFrame();
+			deal.populateDeleteFrame(frame);
 			break;
 		case "Transacts":
-			frame.setTitle("Add Transacts");
+			frame.setTitle("Delete Transacts");
 			TransactsService trans = new TransactsService(dbService);
+			trans.populateDeleteFrame(frame);
 			break;
 		case "Membership":
-			frame.setTitle("Add Membership");
+			frame.setTitle("Delete Membership");
 			MembershipService memb = new MembershipService(dbService);
+			memb.populateDeleteFrame(frame);
 			break;
 		}
 

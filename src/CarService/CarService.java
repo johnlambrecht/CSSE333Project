@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -153,8 +154,24 @@ public class CarService {
 		return 1;
 	}
 	
-	public int delete(String VIN) {
-		
+	public int delete(String VIN, JFrame frame) {
+		CallableStatement cs = null;
+
+		try {
+			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteCar(?)}");
+			cs.registerOutParameter(1, Types.INTEGER);
+			cs.setString(2, VIN);
+			cs.execute();
+			int returnValue = cs.getInt(1);
+			if (returnValue == 1) {
+				JOptionPane.showMessageDialog(null, "ERROR: This car has already been sold");
+				return 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 		return 1;
 	}
 	
@@ -166,7 +183,8 @@ public class CarService {
 		frame.setTitle("Add Car");
 		JLabel jVIN = new JLabel(" VIN");
 		panel.add(jVIN);
-		JTextField tfVIN = new JTextField("hey");
+		JTextField tfVIN = new JTextField();
+		panel.add(tfVIN);
 		JButton doneButton = new JButton("DONE");
 
 		class DoneListener implements ActionListener {
@@ -175,7 +193,7 @@ public class CarService {
 			public void actionPerformed(ActionEvent arg0) {
 
 				String VIN = tfVIN.getText();
-				delete(VIN);
+				delete(VIN, frame);
 			}
 
 		}
