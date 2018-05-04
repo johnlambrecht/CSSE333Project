@@ -19,6 +19,7 @@ import CarService.DatabaseConnectionService;
 import CarService.DealershipService;
 import CarService.ManufacturerService;
 import CarService.MembershipService;
+import CarService.ServicesService;
 import CarService.TransactsService;
 
 public class AddListener implements ActionListener{
@@ -69,6 +70,10 @@ public class AddListener implements ActionListener{
 		case "Customer":
 			CustomerService cust = new CustomerService(dbService);
 			cust.populateFrame();
+			break;
+		case "Service":
+			ServicesService ser =  new ServicesService(dbService);
+			ser.populateFrame();
 			break;
 		}
 	}
