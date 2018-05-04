@@ -4,10 +4,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import CarService.CarService;
+import CarService.CustomerService;
 import CarService.DatabaseConnectionService;
 import CarService.DealershipService;
 import CarService.ManufacturerService;
 import CarService.MembershipService;
+import CarService.ServiceCenterService;
+import CarService.ServicesService;
 import CarService.TransactsService;
 
 public class EditListener implements ActionListener{
@@ -41,6 +44,17 @@ public class EditListener implements ActionListener{
 					break;
 				case "Membership":
 					MembershipService memb = new MembershipService(dbService);
+					break;
+				case "Customer":
+					CustomerService cust = new CustomerService(dbService);
+					cust.populateFrame();
+					break;
+				case "Service":
+					ServicesService ser =  new ServicesService(dbService);
+					ser.populateFrame();
+					break;
+				case "Service Center":
+					ServiceCenterService serCen = new ServiceCenterService(dbService);
 					break;
 				}
 	}
