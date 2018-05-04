@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import CarService.CarService;
 import CarService.DatabaseConnectionService;
 import CarService.DealershipService;
 import CarService.ManufacturerService;
 import CarService.MembershipService;
+import CarService.ServicesService;
 import CarService.TransactsService;
 
 public class DeleteListener implements ActionListener {
@@ -44,14 +46,19 @@ public class DeleteListener implements ActionListener {
 			deal.populateDeleteFrame(frame);
 			break;
 		case "Transacts":
-			frame.setTitle("Delete Transacts");
-			TransactsService trans = new TransactsService(dbService);
-			trans.populateDeleteFrame(frame);
+			JOptionPane.showMessageDialog(null, "Cannot delete a transaction");
 			break;
 		case "Membership":
 			frame.setTitle("Delete Membership");
 			MembershipService memb = new MembershipService(dbService);
 			memb.populateDeleteFrame(frame);
+			break;
+		case "Services":
+			JOptionPane.showMessageDialog(null, "Cannot delete a service");
+			break;
+		case "Service Center":
+			ServicesService ser =  new ServicesService(dbService);
+			ser.populateDeleteFrame(frame);
 			break;
 		}
 

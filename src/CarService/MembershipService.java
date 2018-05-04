@@ -108,17 +108,17 @@ public class MembershipService {
 	return 1;
 	}
 	
-	public int delete(String VIN, JFrame frame) {
+	public int delete(String ID, JFrame frame) {
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call deletePerson(?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteMembership(?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, VIN);
+			cs.setString(2, ID);
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR: This person has already been deleted from the database");
+				JOptionPane.showMessageDialog(null, "ERROR: This membership has already been deleted from the database");
 				return 0;
 			}
 		} catch (SQLException e) {

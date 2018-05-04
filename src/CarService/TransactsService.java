@@ -124,7 +124,7 @@ public class TransactsService {
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call deletePerson(?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteTransacts(?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, VIN);
 			cs.execute();

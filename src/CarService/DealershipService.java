@@ -93,7 +93,7 @@ public class DealershipService {
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call deletePerson(?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteDealership(?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, VIN);
 			cs.execute();

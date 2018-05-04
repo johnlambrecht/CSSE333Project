@@ -130,17 +130,18 @@ public class ServicesService {
 		}
 	return 1;
 	}
-	public int delete(String VIN, JFrame frame) {
+	public int delete(String name, String addr, JFrame frame) {
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call deletePerson(?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteServiceCenter(?, ?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, VIN);
+			cs.setString(2, name);
+			cs.setString(3, addr);
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR: This person has already been deleted from the database");
+				JOptionPane.showMessageDialog(null, "ERROR: This service center has already been removed from the database");
 				return 0;
 			}
 		} catch (SQLException e) {
@@ -153,13 +154,17 @@ public class ServicesService {
 	
 	public void populateDeleteFrame(JFrame frame) {
 		JPanel panel = new JPanel();
-		GridLayout layout = new GridLayout(2,2);
+		GridLayout layout = new GridLayout(4,2);
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
-		JLabel jVIN = new JLabel("ID");
-		panel.add(jVIN);
-		JTextField tfVIN = new JTextField();
-		panel.add(tfVIN);
+		JLabel jCN = new JLabel("CentreName");
+		panel.add(jCN);
+		JTextField tfCN = new JTextField();
+		panel.add(tfCN);
+		JLabel jAdd = new JLabel("Address");
+		panel.add(jAdd);
+		JTextField tfAdd = new JTextField();
+		panel.add(tfAdd);
 		JButton doneButton = new JButton("DONE");
 
 		class DoneListener implements ActionListener {
@@ -167,8 +172,9 @@ public class ServicesService {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				String VIN = tfVIN.getText();
-				delete(VIN, frame);
+				String Addr = tfAdd.getText();
+				String CN = tfCN.getText();
+				delete(CN, Addr, frame);
 			}
 
 		}

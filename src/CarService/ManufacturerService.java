@@ -84,13 +84,13 @@ public class ManufacturerService {
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call deletePerson(?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteManufacturer(?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, VIN);
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR: This person has already been deleted from the database");
+				JOptionPane.showMessageDialog(null, "ERROR: This manufacturer has already been deleted from the database");
 				return 0;
 			}
 		} catch (SQLException e) {
@@ -106,7 +106,7 @@ public class ManufacturerService {
 		GridLayout layout = new GridLayout(2,2);
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
-		JLabel jVIN = new JLabel("ID");
+		JLabel jVIN = new JLabel("Name");
 		panel.add(jVIN);
 		JTextField tfVIN = new JTextField();
 		panel.add(tfVIN);
