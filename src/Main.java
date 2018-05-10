@@ -72,6 +72,7 @@ public class Main {
 		JButton addButton = new JButton("Add");
 		JButton editButton = new JButton("Edit");
 		JButton deleteButton = new JButton("Delete");
+		JButton showButton = new JButton("Show/Hide Deleted Records");
 
 		
 		//adding the button listeners to their buttons
@@ -86,16 +87,26 @@ public class Main {
 		editButton.addActionListener(editListener);
 		deleteButton.addActionListener(deleteListener);
 		
+		
+		DropDownListener ddList = new DropDownListener(dbService, dbList, dataPanel);
+		dbList.addActionListener(ddList);
+		
+		showHideListener shListener = new showHideListener(dbService, dbList, dataPanel, ddList.tName);
+		
+		showButton.addActionListener(shListener);
+		
 		// puts the buttons on the buttonPanel
 		buttonPanel.add(addButton, BorderLayout.NORTH);
 		buttonPanel.add(deleteButton, BorderLayout.CENTER);
 		buttonPanel.add(editButton, BorderLayout.SOUTH);
+		buttonPanel.add(showButton, BorderLayout.SOUTH);
+		
+		
 
 		
 		
 		
 		
-		dbList.addActionListener(new DropDownListener(dbService, dbList, dataPanel));
 		
 		    
 		

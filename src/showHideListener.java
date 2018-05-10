@@ -13,29 +13,18 @@ import javax.swing.JTable;
 
 import CarService.DatabaseConnectionService;
 
-public class DropDownListener implements ActionListener {
-    DatabaseConnectionService dbService;
+public class showHideListener implements ActionListener {
+	DatabaseConnectionService dbService;
     JComboBox dbList;
     JPanel dataPanel;
-    public String tName;
-    
+    String tableName;
 
-    public DropDownListener(DatabaseConnectionService dbService, JComboBox dbList, JPanel dataPanel) {
-        this.dbService = dbService;
-        this.dbList = dbList;
-        this.dataPanel = dataPanel;
-       
-        
-        
-    }
-
+	public showHideListener(DatabaseConnectionService dbService, JComboBox dbList, JPanel dataPanel, String tableName) {
+		// TODO Auto-generated constructor stub.
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		JComboBox<String> combo = (JComboBox<String>) event.getSource();
-        String tableName = (String) combo.getSelectedItem();
-        this.tName = tableName;
-        System.out.println(tableName);
         
         PreparedStatement psmt = null;
 		try {
@@ -101,5 +90,4 @@ public class DropDownListener implements ActionListener {
       
     }
 
-		
 }
