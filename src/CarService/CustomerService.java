@@ -131,4 +131,8 @@ public class CustomerService {
 		frame.add(panel);
 		frame.setVisible(true);
 	}
+	public void populateEditFrame() {
+		JOptionPane.showMessageDialog(null, "Customers cannot be edited.","Warning", JOptionPane.WARNING_MESSAGE);
+		
+	}
 }

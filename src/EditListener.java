@@ -33,10 +33,11 @@ public class EditListener implements ActionListener{
 				JFrame editFrame = new JFrame();
 				editFrame.setTitle("Edit");
 				editFrame.setSize(1000, 500);
-				editFrame.setVisible(true);
+				
 				switch(this.dbNames.get(dbList.getSelectedIndex())) {
 				case "Car":
 					CarService car = new CarService(dbService);
+					editFrame.setVisible(true);
 					car.populateEditFrame(editFrame);
 					break;
 //				case "Manufacturer":
@@ -45,6 +46,7 @@ public class EditListener implements ActionListener{
 //					break;
 				case "Dealership":
 					DealershipService deal = new DealershipService(dbService);
+					editFrame.setVisible(true);
 					deal.populateEditFrame(editFrame);
 					break;
 				case "Transacts":
@@ -52,22 +54,31 @@ public class EditListener implements ActionListener{
 					break;
 				case "Membership":
 					MembershipService memb = new MembershipService(dbService);
+					editFrame.setVisible(true);
 					memb.populateEditFrame(editFrame);
 					break;
 				case "Customer":
 					CustomerService cust = new CustomerService(dbService);
-					cust.populateFrame();
+					cust.populateEditFrame();
 					break;
 				case "Service":
 					ServicesService ser =  new ServicesService(dbService);
-					ser.populateFrame();
+					//ser.populateEditFrame();
 					break;
 				case "Service Center":
 					ServiceCenterService serCen = new ServiceCenterService(dbService);
+					editFrame.setVisible(true);
+					serCen.populateEditFrame(editFrame);
 					break;
 				case "Person":
 					PersonService perserv = new PersonService(dbService);
+					editFrame.setVisible(true);
 					perserv.populateEditFrame(editFrame);
+					break;
+				case "SalesPerson":
+					SalesPersonService salesP = new SalesPersonService(dbService);
+					editFrame.setVisible(true);
+					salesP.populateEditFrame(editFrame);
 					break;
 				}
 	}
