@@ -7,10 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import CarService.CarService;
+import CarService.CustomerService;
 import CarService.DatabaseConnectionService;
 import CarService.DealershipService;
 import CarService.ManufacturerService;
 import CarService.MembershipService;
+import CarService.SalesPersonService;
 import CarService.ServicesService;
 import CarService.TransactsService;
 
@@ -59,6 +61,14 @@ public class DeleteListener implements ActionListener {
 		case "Service Center":
 			ServicesService ser =  new ServicesService(dbService);
 			ser.populateDeleteFrame(frame);
+			break;
+		case "Customer":
+			CustomerService cust = new CustomerService(dbService);
+			cust.populateDeleteFrame(frame);
+			break;
+		case "SalesPerson":
+			SalesPersonService salesP = new SalesPersonService(dbService);
+			salesP.populateDeleteFrame(frame);
 			break;
 		}
 

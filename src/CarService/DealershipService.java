@@ -70,7 +70,7 @@ public class DealershipService {
 		CallableStatement cs = null;
 		
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call addDealership(?,?)}" );
+			cs = this.dbService.getConnection().prepareCall("{ ? = call addSalesPerson(?,?)}" );
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, name);
 			cs.setString(3, address);
@@ -85,7 +85,7 @@ public class DealershipService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-//			JOptionPane.showMessageDialog(null, "Add Restaurant not implemented.");
+//			
 		}
 	return 1;
 	}

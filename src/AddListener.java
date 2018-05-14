@@ -19,6 +19,7 @@ import CarService.DatabaseConnectionService;
 import CarService.DealershipService;
 import CarService.ManufacturerService;
 import CarService.MembershipService;
+import CarService.SalesPersonService;
 import CarService.ServiceCenterService;
 import CarService.ServicesService;
 import CarService.TransactsService;
@@ -79,6 +80,10 @@ public class AddListener implements ActionListener{
 		case "Service Center":
 			ServiceCenterService serCen =  new ServiceCenterService(dbService);
 			serCen.populateAddFrame();
+			break;
+		case "SalesPerson":
+			SalesPersonService saleP = new SalesPersonService(dbService);
+			saleP.populateFrame(addFrame);
 			break;
 		}
 	}

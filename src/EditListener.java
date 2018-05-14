@@ -11,7 +11,7 @@ import CarService.DatabaseConnectionService;
 import CarService.DealershipService;
 import CarService.ManufacturerService;
 import CarService.MembershipService;
-import CarService.PersonService;
+import CarService.SalesPersonService;
 import CarService.ServiceCenterService;
 import CarService.ServicesService;
 import CarService.TransactsService;
@@ -59,7 +59,7 @@ public class EditListener implements ActionListener{
 					break;
 				case "Customer":
 					CustomerService cust = new CustomerService(dbService);
-					cust.populateEditFrame();
+					cust.populateEditFrame(editFrame);
 					break;
 				case "Service":
 					ServicesService ser =  new ServicesService(dbService);
@@ -69,11 +69,6 @@ public class EditListener implements ActionListener{
 					ServiceCenterService serCen = new ServiceCenterService(dbService);
 					editFrame.setVisible(true);
 					serCen.populateEditFrame(editFrame);
-					break;
-				case "Person":
-					PersonService perserv = new PersonService(dbService);
-					editFrame.setVisible(true);
-					perserv.populateEditFrame(editFrame);
 					break;
 				case "SalesPerson":
 					SalesPersonService salesP = new SalesPersonService(dbService);

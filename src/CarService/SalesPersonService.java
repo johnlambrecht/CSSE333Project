@@ -1,3 +1,4 @@
+package CarService;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import CarService.DatabaseConnectionService;
 
 public class SalesPersonService {
 	DatabaseConnectionService dbService;
@@ -167,6 +166,11 @@ return 1;
 		}
 		return 1;
 
+	}
+
+	public void populateDeleteFrame(JFrame frame) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
