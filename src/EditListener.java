@@ -40,10 +40,10 @@ public class EditListener implements ActionListener{
 					editFrame.setVisible(true);
 					car.populateEditFrame(editFrame);
 					break;
-//				case "Manufacturer":
-//					ManufacturerService manf = new ManufacturerService(dbService);
-//					manf.populateEditFrame(editFrame);
-//					break;
+				case "Manufacturer":
+					ManufacturerService manf = new ManufacturerService(dbService);
+					manf.populateEditFrame(editFrame);
+					break;
 				case "Dealership":
 					DealershipService deal = new DealershipService(dbService);
 					editFrame.setVisible(true);
@@ -59,11 +59,13 @@ public class EditListener implements ActionListener{
 					break;
 				case "Customer":
 					CustomerService cust = new CustomerService(dbService);
+					editFrame.setVisible(true);
 					cust.populateEditFrame(editFrame);
 					break;
-				case "Service":
+				case "Services":
 					ServicesService ser =  new ServicesService(dbService);
-					//ser.populateEditFrame();
+					editFrame.setVisible(true);
+					ser.populateEditFrame(editFrame);
 					break;
 				case "Service Center":
 					ServiceCenterService serCen = new ServiceCenterService(dbService);

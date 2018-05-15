@@ -128,37 +128,8 @@ public class ManufacturerService {
 		frame.add(panel);
 		frame.setVisible(true);
 	}
-	
-	
-	
-	
-//	public void populateEditFrame(JFrame frame) {
-//		JPanel panel = new JPanel();
-//		GridLayout layout = new GridLayout(2,2);
-//		panel.setLayout(layout);
-//		frame.setSize(1000, 500);
-//		JLabel jVIN = new JLabel("Name");
-//		panel.add(jVIN);
-//		JTextField tfVIN = new JTextField();
-//		panel.add(tfVIN);
-//		JButton doneButton = new JButton("DONE");
-//
-//		class DoneListener implements ActionListener {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//
-//				String VIN = tfVIN.getText();
-//				delete(VIN, frame);
-//			}
-//
-//		}
-//		DoneListener doneListener = new DoneListener();
-//		doneButton.addActionListener(doneListener);
-//		panel.add(doneButton);
-//		frame.add(panel);
-//		frame.setVisible(true);
-//		
-//	}
-	
+	public void populateEditFrame(JFrame editFrame) {
+		JOptionPane.showMessageDialog(editFrame, "Manufacturers cannot be edited","Error",JOptionPane.ERROR_MESSAGE);
+		
+	}
 }
