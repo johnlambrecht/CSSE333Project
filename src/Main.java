@@ -72,6 +72,7 @@ public class Main {
 		JButton addButton = new JButton("Add");
 		JButton editButton = new JButton("Edit");
 		JButton deleteButton = new JButton("Delete");
+		JButton searchButton = new JButton("Search");
 		JButton showButton = new JButton("Show/Hide Deleted Records");
 
 		
@@ -100,6 +101,7 @@ public class Main {
 		buttonPanel.add(deleteButton, BorderLayout.CENTER);
 		buttonPanel.add(editButton, BorderLayout.SOUTH);
 		buttonPanel.add(showButton, BorderLayout.SOUTH);
+		buttonPanel.add(searchButton, BorderLayout.SOUTH);
 		
 		
 
