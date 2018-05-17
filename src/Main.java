@@ -27,8 +27,11 @@ public class Main {
 	// }
 
 	static String DBNAME;
+	static boolean showing = true;
 	
 	public static void main(String[] args) throws SQLException {
+		// boolean for show/hide
+		
 		//Establish a connection with the database
 		DBNAME = "CarInventroyManagement";
 		DatabaseConnectionService dbService = new DatabaseConnectionService("golem.csse.rose-hulman.edu", DBNAME);
@@ -92,7 +95,7 @@ public class Main {
 		DropDownListener ddList = new DropDownListener(dbService, dbList, dataPanel);
 		dbList.addActionListener(ddList);
 		
-		showHideListener shListener = new showHideListener(dbService, dbList, dataPanel, ddList.tName);
+		showHideListener shListener = new showHideListener(dbService, dbList, dataPanel, "Car");
 		
 		showButton.addActionListener(shListener);
 		

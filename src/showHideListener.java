@@ -20,15 +20,40 @@ public class showHideListener implements ActionListener {
     String tableName;
 
 	public showHideListener(DatabaseConnectionService dbService, JComboBox dbList, JPanel dataPanel, String tableName) {
-		// TODO Auto-generated constructor stub.
+		this.dbList = dbList;
+		this.dataPanel = dataPanel;
+		this.tableName = tableName;
+		this.dbService = dbService;
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		
+		System.out.println("table name: " + this.tableName);
         
         PreparedStatement psmt = null;
 		try {
-			psmt = this.dbService.getConnection().prepareStatement("SELECT * FROM [" +  tableName + "]");
+			String showSwitch = "";
+			if (this.tableName.equals("Car")) {
+				if (Main.showing == true) {
+					showSwitch = " WHERE Availability = 'Y'";
+					Main.showing = false;
+				} else {
+					Main.showing = true;
+				}
+			} else if (this.tableName.equals("Transacts")) {
+				return;
+			}
+			else {
+				if (Main.showing == true) {
+					showSwitch = " WHERE Visible = 1";
+					Main.showing = false;
+				} else {
+					Main.showing = true;
+				}
+			}
+			psmt = this.dbService.getConnection().prepareStatement("SELECT * FROM [" +  this.tableName + "]" + showSwitch);
 		} catch (SQLException exception) {
 			// TODO Auto-generated catch-block stub.
 			exception.printStackTrace();
