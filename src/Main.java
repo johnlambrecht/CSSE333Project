@@ -97,7 +97,7 @@ public class Main {
 		DropDownListener ddList = new DropDownListener(dbService, dbList, dataPanel);
 		dbList.addActionListener(ddList);
 		
-		showHideListener shListener = new showHideListener(dbService, dbList, dataPanel, dbList.getName());
+		showHideListener shListener = new showHideListener(dbService, dbList, dataPanel, "Car");
 		
 		showButton.addActionListener(shListener);
 		

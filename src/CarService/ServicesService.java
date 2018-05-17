@@ -114,60 +114,6 @@ public class ServicesService {
 
 	return 1;
 	}
-	public int delete(String name, String addr, JFrame frame) {
-		CallableStatement cs = null;
-
-		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteServiceCenter(?, ?)}");
-			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, name);
-			cs.setString(3, addr);
-			cs.execute();
-			int returnValue = cs.getInt(1);
-			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR: This service center has already been removed from the database");
-				return 0;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-		return 1;
-	}
-	
-	public void populateDeleteFrame(JFrame frame) {
-		JPanel panel = new JPanel();
-		GridLayout layout = new GridLayout(4,2);
-		panel.setLayout(layout);
-		frame.setSize(1000, 500);
-		JLabel jCN = new JLabel("CenterName");
-		panel.add(jCN);
-		JTextField tfCN = new JTextField();
-		panel.add(tfCN);
-		JLabel jAdd = new JLabel("Address");
-		panel.add(jAdd);
-		JTextField tfAdd = new JTextField();
-		panel.add(tfAdd);
-		JButton doneButton = new JButton("DONE");
-
-		class DoneListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				String Addr = tfAdd.getText();
-				String CN = tfCN.getText();
-				delete(CN, Addr, frame);
-			}
-
-		}
-		DoneListener doneListener = new DoneListener();
-		doneButton.addActionListener(doneListener);
-		panel.add(doneButton);
-		frame.add(panel);
-		frame.setVisible(true);
-	}
 	
 	public void populateEditFrame(JFrame frame) {
 		JPanel panel = new JPanel();
