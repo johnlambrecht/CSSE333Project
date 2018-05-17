@@ -24,6 +24,7 @@ public class DropDownListener implements ActionListener {
         this.dbService = dbService;
         this.dbList = dbList;
         this.dataPanel = dataPanel;
+        this.tName = "Car";
        
         
         
@@ -35,7 +36,6 @@ public class DropDownListener implements ActionListener {
 		JComboBox<String> combo = (JComboBox<String>) event.getSource();
         String tableName = (String) combo.getSelectedItem();
         this.tName = tableName;
-        System.out.println(this.tName);
         Main.showing = true;
         
         PreparedStatement psmt = null;

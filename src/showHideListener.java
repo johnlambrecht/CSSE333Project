@@ -18,11 +18,12 @@ public class showHideListener implements ActionListener {
     JComboBox dbList;
     JPanel dataPanel;
     String tableName;
+    DropDownListener ddlist;
 
-	public showHideListener(DatabaseConnectionService dbService, JComboBox dbList, JPanel dataPanel, String tableName) {
+	public showHideListener(DatabaseConnectionService dbService, JComboBox dbList, JPanel dataPanel, DropDownListener ddlist) {
 		this.dbList = dbList;
 		this.dataPanel = dataPanel;
-		this.tableName = tableName;
+		this.ddlist = ddlist;
 		this.dbService = dbService;
 		
 	}
@@ -30,7 +31,7 @@ public class showHideListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
-		System.out.println("table name: " + this.tableName);
+		this.tableName = this.ddlist.getTableName();
         
         PreparedStatement psmt = null;
 		try {
