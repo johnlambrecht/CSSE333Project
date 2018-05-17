@@ -43,7 +43,7 @@ public class showHideListener implements ActionListener {
 				} else {
 					Main.showing = true;
 				}
-			} else if (this.tableName.equals("Transacts")) {
+			} else if (this.tableName.equals("Transacts") || this.tableName.equals("Services")) {
 				return;
 			}
 			else {
