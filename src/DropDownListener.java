@@ -25,8 +25,6 @@ public class DropDownListener implements ActionListener {
         this.dbList = dbList;
         this.dataPanel = dataPanel;
        
-        
-        
     }
 
 

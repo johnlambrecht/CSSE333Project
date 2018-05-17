@@ -83,11 +83,12 @@ public class Main {
 		DeleteListener deleteListener = new DeleteListener(dbService, dbNames,dbList);
 		//AddListener addListener = new AddListener(dbService, dbNames.get(dbList.getSelectedIndex()));
 		AddListener addListener = new AddListener(dbService, dbNames,dbList);
+		SearchListener searchListener = new SearchListener(dbService, dataPanel);
 		
 		addButton.addActionListener(addListener);
 		editButton.addActionListener(editListener);
 		deleteButton.addActionListener(deleteListener);
-		
+		searchButton.addActionListener(searchListener);
 		
 		DropDownListener ddList = new DropDownListener(dbService, dbList, dataPanel);
 		dbList.addActionListener(ddList);
