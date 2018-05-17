@@ -2,6 +2,7 @@
 //import sodabase.ui.ApplicationRunner;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,7 +45,9 @@ public class Main {
 
 		// a panel for our buttons
 		JPanel buttonPanel = new JPanel();
-
+		GridLayout buttonLayout = new GridLayout(20, 0);
+		buttonPanel.setLayout(buttonLayout);
+		
 		// a panel for the data
 		JPanel dataPanel = new JPanel();
 		dataPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -68,7 +71,7 @@ public class Main {
 	    	e.printStackTrace();
 	    } 
 		JComboBox dbList = new JComboBox(dbNames.toArray());
-		buttonPanel.add(dbList, BorderLayout.SOUTH);
+		buttonPanel.add(dbList);
 
 		// creates each individual button. will need to add listeners to make
 		// the buttons work
@@ -103,11 +106,11 @@ public class Main {
 		showButton.addActionListener(shListener);
 		
 		// puts the buttons on the buttonPanel
-		buttonPanel.add(addButton, BorderLayout.NORTH);
-		buttonPanel.add(deleteButton, BorderLayout.CENTER);
-		buttonPanel.add(editButton, BorderLayout.SOUTH);
-		buttonPanel.add(showButton, BorderLayout.SOUTH);
-		buttonPanel.add(searchButton, BorderLayout.SOUTH);
+		buttonPanel.add(addButton);
+		buttonPanel.add(deleteButton);
+		buttonPanel.add(editButton);
+		buttonPanel.add(showButton);
+		buttonPanel.add(searchButton);
 		
 		
 
