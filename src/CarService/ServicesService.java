@@ -38,9 +38,6 @@ public class ServicesService {
 		JTextField jName = new JTextField("Name");
 		panel.add(jName);
 	
-		JTextField jDate = new JTextField("Date");
-		panel.add(jDate);
-		
 		JTextField jType = new JTextField("Type");
 		panel.add(jType);
 		
@@ -62,11 +59,6 @@ public class ServicesService {
 				}
 				
 				
-				String date = null;
-				if(!jDate.getText().equals("Date")){
-				date = jDate.getText();
-				}
-				
 				String type = null;
 				if(!jType.getText().equals("Type")){
 				type = jType.getText();
@@ -74,7 +66,7 @@ public class ServicesService {
 				
 				
 				
-				add(vin,name,date,type);
+				add(vin,name,type);
 				frame.setVisible(false);
 			}
 			
@@ -87,17 +79,16 @@ public class ServicesService {
 	
 }
 
-	public int add(String VIN, String name, String date, String type) {
+	public int add(String VIN, String name, String type) {
 		
 		CallableStatement cs = null;
 		
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call addService(?,?,?,?)}" );
+			cs = this.dbService.getConnection().prepareCall("{ ? = call addService(?,?,?)}" );
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, VIN);
 			cs.setString(3, name);
-			cs.setString(4,date);
-			cs.setString(5, type);
+			cs.setString(4, type);
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if(returnValue == 1) {
@@ -123,60 +114,6 @@ public class ServicesService {
 
 	return 1;
 	}
-	public int delete(String name, String addr, JFrame frame) {
-		CallableStatement cs = null;
-
-		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteServiceCenter(?, ?)}");
-			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, name);
-			cs.setString(3, addr);
-			cs.execute();
-			int returnValue = cs.getInt(1);
-			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR: This service center has already been removed from the database");
-				return 0;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-		return 1;
-	}
-	
-	public void populateDeleteFrame(JFrame frame) {
-		JPanel panel = new JPanel();
-		GridLayout layout = new GridLayout(4,2);
-		panel.setLayout(layout);
-		frame.setSize(1000, 500);
-		JLabel jCN = new JLabel("CenterName");
-		panel.add(jCN);
-		JTextField tfCN = new JTextField();
-		panel.add(tfCN);
-		JLabel jAdd = new JLabel("Address");
-		panel.add(jAdd);
-		JTextField tfAdd = new JTextField();
-		panel.add(tfAdd);
-		JButton doneButton = new JButton("DONE");
-
-		class DoneListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				String Addr = tfAdd.getText();
-				String CN = tfCN.getText();
-				delete(CN, Addr, frame);
-			}
-
-		}
-		DoneListener doneListener = new DoneListener();
-		doneButton.addActionListener(doneListener);
-		panel.add(doneButton);
-		frame.add(panel);
-		frame.setVisible(true);
-	}
 	
 	public void populateEditFrame(JFrame frame) {
 		JPanel panel = new JPanel();
@@ -191,9 +128,6 @@ public class ServicesService {
 		
 		JTextField jName = new JTextField("Name");
 		panel.add(jName);
-		
-		JTextField jDate = new JTextField("Date");
-		panel.add(jDate);
 		
 		JTextField jType = new JTextField("Type");
 		panel.add(jType);
@@ -216,11 +150,6 @@ public class ServicesService {
 				}
 				
 				
-				String date = null;
-				if(!jDate.getText().equals("Date")){
-				date = jDate.getText();
-				}
-				
 				String type = null;
 				if(!jType.getText().equals("Type")){
 				type = jType.getText();
@@ -228,7 +157,7 @@ public class ServicesService {
 				
 				
 				
-				edit(vin,name,date,type);
+				edit(vin,name,type);
 				frame.setVisible(false);
 			}
 			
@@ -241,16 +170,15 @@ public class ServicesService {
 	
 }
 
-	public int edit(String VIN, String name, String date, String type) {
+	public int edit(String VIN, String name, String type) {
 		
 		CallableStatement cs = null;
 		
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call editService(?,?,?,?)}" );
+			cs = this.dbService.getConnection().prepareCall("{ ? = call editService(?,?,?)}" );
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, VIN);
 			cs.setString(3, name);
-			cs.setString(4,date);
 			cs.setString(5, type);
 			cs.execute();
 			int returnValue = cs.getInt(1);
@@ -258,15 +186,12 @@ public class ServicesService {
 				JOptionPane.showMessageDialog(null, "ERROR: Must Enter a valid VIN");
 				return 0;
 			}else if(returnValue == 2) {
-				JOptionPane.showMessageDialog(null, "ERROR: Must Enter a valid Name");
+				JOptionPane.showMessageDialog(null, "ERROR: Must Enter a valid Service Center Name");
 				return 0;
 			}else if(returnValue == 3) {
-				JOptionPane.showMessageDialog(null, "ERROR: Must Enter a valid Address");
-				return 0;
-			}else if(returnValue == 4) {
 				JOptionPane.showMessageDialog(null, "ERROR: The VIN is not valid");
 				return 0;
-			}else if(returnValue == 5) {
+			}else if(returnValue == 4) {
 				JOptionPane.showMessageDialog(null, "ERROR: The Name or the Address is not valid");
 				return 0;
 			}

@@ -33,7 +33,8 @@ public class DropDownListener implements ActionListener {
 		JComboBox<String> combo = (JComboBox<String>) event.getSource();
         String tableName = (String) combo.getSelectedItem();
         this.tName = tableName;
-        System.out.println(tableName);
+        System.out.println(this.tName);
+        Main.showing = true;
         
         PreparedStatement psmt = null;
 		try {
@@ -98,6 +99,11 @@ public class DropDownListener implements ActionListener {
         
       
     }
+	
+	public String getTableName() {
+		return this.tName;
+		
+	}
 
 		
 }
