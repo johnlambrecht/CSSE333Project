@@ -26,8 +26,6 @@ public class DropDownListener implements ActionListener {
         this.dataPanel = dataPanel;
         this.tName = "Car";
        
-        
-        
     }
 
 

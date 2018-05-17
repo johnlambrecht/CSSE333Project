@@ -32,17 +32,13 @@ public class TransactsService {
 			frame.setSize(1000, 500);
 			frame.setTitle("Add Transaction");
 		
-			JTextField jSalesPerson = new JTextField("SalesPerson");
+			JTextField jSalesPerson = new JTextField("EmployeeID");
 			panel.add(jSalesPerson);
 			
 			
 			
 			JTextField jSellP = new JTextField("Sell Price");
 			panel.add(jSellP);
-			
-			
-			JTextField jDate = new JTextField("Date");
-			panel.add(jDate);
 			
 			
 			JTextField jCar = new JTextField("Car");
@@ -68,15 +64,20 @@ public class TransactsService {
 						sellP = Integer.parseInt(jSellP.getText());
 					}
 					
-					String salesPerson = jSalesPerson.getText();
-					String date = null;
-					if(!jDate.getText().equals("Date")){
-					date = jDate.getText();
+					int salesPerson = 0;
+					if(!jSalesPerson.getText().equals("EmployeeID")){
+						salesPerson = Integer.parseInt(jSalesPerson.getText());
 					}
+							
 					String car = jCar.getText();
-					String customer = jCustomer.getText();
 					
-					add(salesPerson,sellP,date,car,customer);
+					int customer = 0;
+					if(!jCustomer.getText().equals("Customer")){
+					customer = Integer.parseInt(jCustomer.getText());
+				}
+					
+					
+					add(salesPerson,sellP,car,customer);
 					frame.setVisible(false);
 				}
 				
@@ -89,18 +90,17 @@ public class TransactsService {
 		
 	}
 	
-	public int add(String salesPerson,int sellP,String date,String car,String customer) {
+	public int add(int salesPerson,int sellP,String car,int customer) {
 		
 		CallableStatement cs = null;
 		
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call addTransacts(?,?,?,?,?)}" );
+			cs = this.dbService.getConnection().prepareCall("{ ? = call addTransacts(?,?,?,?)}" );
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, salesPerson);
+			cs.setInt(2, salesPerson);
 			cs.setInt(3, sellP);
-			cs.setString(4, date);
-			cs.setString(5, car);
-			cs.setString(6,customer);
+			cs.setString(4, car);
+			cs.setInt(5,customer);
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if(returnValue == 1) {
@@ -119,54 +119,4 @@ public class TransactsService {
 		}
 	return 1;
 	}
-	
-	public int delete(String VIN, JFrame frame) {
-		CallableStatement cs = null;
-
-		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call deleteTransacts(?)}");
-			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, VIN);
-			cs.execute();
-			int returnValue = cs.getInt(1);
-			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR: This person has already been deleted from the database");
-				return 0;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-		return 1;
-	}
-	
-	public void populateDeleteFrame(JFrame frame) {
-		JPanel panel = new JPanel();
-		GridLayout layout = new GridLayout(2,2);
-		panel.setLayout(layout);
-		frame.setSize(1000, 500);
-		JLabel jVIN = new JLabel("ID");
-		panel.add(jVIN);
-		JTextField tfVIN = new JTextField();
-		panel.add(tfVIN);
-		JButton doneButton = new JButton("DONE");
-
-		class DoneListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				String VIN = tfVIN.getText();
-				delete(VIN, frame);
-			}
-
-		}
-		DoneListener doneListener = new DoneListener();
-		doneButton.addActionListener(doneListener);
-		panel.add(doneButton);
-		frame.add(panel);
-		frame.setVisible(true);
-	}
-
 }

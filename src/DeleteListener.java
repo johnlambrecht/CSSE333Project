@@ -13,6 +13,7 @@ import CarService.DealershipService;
 import CarService.ManufacturerService;
 import CarService.MembershipService;
 import CarService.SalesPersonService;
+import CarService.ServiceCenterService;
 import CarService.ServicesService;
 import CarService.TransactsService;
 
@@ -59,7 +60,7 @@ public class DeleteListener implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Cannot delete a service");
 			break;
 		case "Service Center":
-			ServicesService ser =  new ServicesService(dbService);
+			ServiceCenterService ser =  new ServiceCenterService(dbService);
 			ser.populateDeleteFrame(frame);
 			break;
 		case "Customer":
