@@ -69,9 +69,7 @@ public class EditListener implements ActionListener{
 					ser.populateEditFrame(editFrame);
 					break;
 				case "Service Center":
-					ServiceCenterService serCen = new ServiceCenterService(dbService);
-					editFrame.setVisible(true);
-					serCen.populateEditFrame(editFrame);
+					JOptionPane.showMessageDialog(null, "Cannot edit a Service Center");
 					break;
 				case "SalesPerson":
 					SalesPersonService salesP = new SalesPersonService(dbService);
