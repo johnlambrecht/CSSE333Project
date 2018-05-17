@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import CarService.CarService;
 import CarService.CustomerService;
@@ -50,7 +51,7 @@ public class EditListener implements ActionListener{
 					deal.populateEditFrame(editFrame);
 					break;
 				case "Transacts":
-					TransactsService trans = new TransactsService(dbService);
+					JOptionPane.showMessageDialog(null, "Cannot edit a transaction");
 					break;
 				case "Membership":
 					MembershipService memb = new MembershipService(dbService);

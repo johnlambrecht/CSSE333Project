@@ -77,15 +77,17 @@ public class Main {
 		JButton deleteButton = new JButton("Delete");
 		JButton searchButton = new JButton("Search");
 		JButton showButton = new JButton("Show/Hide Deleted Records");
+		
 
 		
 		//adding the button listeners to their buttons
-//		ButtonListener addListener = new ButtonListener('a');
+
 		
 		EditListener editListener = new EditListener(dbService,dbNames, dbList);
 		DeleteListener deleteListener = new DeleteListener(dbService, dbNames,dbList);
 		//AddListener addListener = new AddListener(dbService, dbNames.get(dbList.getSelectedIndex()));
 		AddListener addListener = new AddListener(dbService, dbNames,dbList);
+		
 		
 		addButton.addActionListener(addListener);
 		editButton.addActionListener(editListener);
@@ -95,7 +97,7 @@ public class Main {
 		DropDownListener ddList = new DropDownListener(dbService, dbList, dataPanel);
 		dbList.addActionListener(ddList);
 		
-		showHideListener shListener = new showHideListener(dbService, dbList, dataPanel, "Car");
+		showHideListener shListener = new showHideListener(dbService, dbList, dataPanel, dbList.getName());
 		
 		showButton.addActionListener(shListener);
 		
