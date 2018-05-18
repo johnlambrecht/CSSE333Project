@@ -27,7 +27,7 @@ public class MembershipService {
 		JFrame frame = new JFrame();
 		// System.out.println("working with frame");
 		JPanel panel = new JPanel();
-		GridLayout layout = new GridLayout(4, 2);
+		GridLayout layout = new GridLayout(2, 1);
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
 		frame.setTitle("Add Membership");
