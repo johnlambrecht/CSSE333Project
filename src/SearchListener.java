@@ -22,6 +22,10 @@ import CarService.DatabaseConnectionService;
 
 public class SearchListener implements ActionListener{
 	
+	/**
+	 * The code below has modified version of some methods given to us in the connectivity lab
+	 * Edited by: Abhimanyu Agarwal
+	 */
 	private DatabaseConnectionService dbService;
 	private JPanel dataPanel;
 
