@@ -27,7 +27,7 @@ public class MembershipService {
 		JFrame frame = new JFrame();
 		// System.out.println("working with frame");
 		JPanel panel = new JPanel();
-		GridLayout layout = new GridLayout(2, 1);
+		GridLayout layout = new GridLayout(4, 2);
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
 		frame.setTitle("Add Membership");
@@ -94,7 +94,22 @@ public class MembershipService {
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR");
+				JOptionPane.showMessageDialog(null, "Must enter a valid CustomerID");
+				return 0;
+			}
+			if (returnValue == 2) {
+				JOptionPane.showMessageDialog(null,
+						"Must enter a valid Manufacturer");
+				return 0;
+			}
+			if (returnValue == 3) {
+				JOptionPane.showMessageDialog(null,
+						"The CustomerID does not exist");
+				return 0;
+			}
+			if (returnValue == 4) {
+				JOptionPane.showMessageDialog(null,
+						"The manufacturer " + manf + " does not exist");
 				return 0;
 			}
 		} catch (SQLException e) {
