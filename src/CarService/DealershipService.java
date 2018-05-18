@@ -146,7 +146,8 @@ public class DealershipService {
 		frame.setSize(1000, 500);
 		frame.setTitle("Add Dealership");
 		
-		
+		JTextField jID = new JTextField("ID Number");
+		panel.add(jID);
 		
 		JTextField jName = new JTextField("Name");
 		panel.add(jName);
@@ -163,6 +164,10 @@ public class DealershipService {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+				int id = -1;
+				if(!jID.getText().equals("Name")){
+						id = Integer.parseInt(jID.getText());
+				}
 				
 				String name = null;
 				if(!jName.getText().equals("Name")){
@@ -175,7 +180,7 @@ public class DealershipService {
 				}
 				
 				
-				edit(name,address);
+				edit(id,name,address);
 				frame.setVisible(false);
 			}
 			
@@ -189,15 +194,16 @@ public class DealershipService {
 }
 
 
-public int edit(String name, String address) {
+public int edit(int id, String name, String address) {
 	
 	CallableStatement cs = null;
 	
 	try {
-		cs = this.dbService.getConnection().prepareCall("{ ? = call editDealership(?,?)}" );
+		cs = this.dbService.getConnection().prepareCall("{ ? = call editDealership(?,?,?)}" );
 		cs.registerOutParameter(1, Types.INTEGER);
-		cs.setString(2, name);
-		cs.setString(3, address);
+		cs.setInt(2, id);
+		cs.setString(3, name);
+		cs.setString(4, address);
 		cs.execute();
 		int returnValue = cs.getInt(1);
 		if(returnValue == 1) {
@@ -206,7 +212,10 @@ public int edit(String name, String address) {
 		}else if(returnValue == 2) {
 			JOptionPane.showMessageDialog(null, "ERROR: Dealership does not exist");
 			return 0;
-		}
+		}else if (returnValue == 3) {
+			JOptionPane.showMessageDialog(null, "ERROR: Must enter an ID Number");
+			return 0;
+		} 
 	} catch (SQLException e) {
 		e.printStackTrace();
 //		JOptionPane.showMessageDialog(null, "Add Restaurant not implemented.");

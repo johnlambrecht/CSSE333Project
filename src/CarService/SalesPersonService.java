@@ -235,6 +235,9 @@ public class SalesPersonService {
 			} else if (returnValue == 2) {
 				JOptionPane.showMessageDialog(null, "ERROR: Must enter a Dealership");
 				return 0;
+			}  else if (returnValue == 3) {
+				JOptionPane.showMessageDialog(null, "ERROR: This employee does not exist");
+				return 0;
 			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
