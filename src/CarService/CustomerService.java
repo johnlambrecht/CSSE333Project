@@ -206,9 +206,9 @@ public class CustomerService {
 					CID = Integer.parseInt(jCID.getText());
 				}
 
-				int phoneNum = 0;
+				String phoneNum = null;
 				if(!jPhoneNum.getText().equals("Phone Number")){
-				 phoneNum = Integer.parseInt(jPhoneNum.getText());
+				 phoneNum = jPhoneNum.getText();
 				}
 				
 				String lName = null;
@@ -245,7 +245,7 @@ public class CustomerService {
 	
 }
 
-	public int edit(int customerID, int phoneNum, String fname, String minit, String lname, String address) {
+	public int edit(int customerID, String phoneNum, String fname, String minit, String lname, String address) {
 		
 		CallableStatement cs = null;
 		
@@ -253,7 +253,7 @@ public class CustomerService {
 			cs = this.dbService.getConnection().prepareCall("{ ? = call editCustomer(?,?,?,?,?,?)}" );
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setInt(2, customerID);
-			cs.setInt(3, phoneNum);
+			cs.setString(3, phoneNum);
 			cs.setString(4, fname);
 			cs.setString(5, minit);
 			cs.setString(6, lname);

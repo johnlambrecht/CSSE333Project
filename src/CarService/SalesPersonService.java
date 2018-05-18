@@ -118,6 +118,9 @@ public class SalesPersonService {
 			} else if (returnValue == 2) {
 				JOptionPane.showMessageDialog(null, "ERROR: Must enter a dealership");
 				return 0;
+			} else if (returnValue == 3) {
+				JOptionPane.showMessageDialog(null, "ERROR: The dealership does not exist");
+				return 0;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,7 +135,10 @@ public class SalesPersonService {
 		GridLayout layout = new GridLayout(2, 1);
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
-		frame.setTitle("Edit Membership");
+		frame.setTitle("Edit Salesperson");
+		
+		JTextField jEID = new JTextField("EmployeeID");
+		panel.add(jEID);
 
 		JTextField jWorksFor = new JTextField("Service Center");
 		panel.add(jWorksFor);
@@ -159,14 +165,18 @@ public class SalesPersonService {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
+				int eID = -1;
+				if (!jEID.getText().equals("EmployeeID")) {
+					eID = Integer.parseInt(jEID.getText());
+				}
 				String worksFor = null;
 				if (!jWorksFor.getText().equals("Service Center")) {
 					worksFor = jWorksFor.getText();
 				}
 
-				int phoneNum = 0;
+				String phoneNum = null;
 				if (!jPhoneNum.getText().equals("Phone Number")) {
-					phoneNum = Integer.parseInt(jPhoneNum.getText());
+					phoneNum = jPhoneNum.getText();
 				}
 
 				String lName = null;
@@ -189,7 +199,7 @@ public class SalesPersonService {
 					address = jAddress.getText();
 				}
 
-				edit(worksFor, phoneNum, fName, lName, minit, address);
+				edit(eID,worksFor, phoneNum, fName, lName, minit, address);
 				frame.setVisible(false);
 			}
 
@@ -202,26 +212,30 @@ public class SalesPersonService {
 
 	}
 
-	public int edit(String worksFor, int phoneNum, String fName, String lName, String minit, String address) {
+	public int edit(int eid, String worksFor, String phoneNum, String fName, String lName, String minit, String address) {
 
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call editSalesPerson(?,?,?,?,?,?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call editSalesPerson(?,?,?,?,?,?,?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, worksFor);
-			cs.setInt(43, phoneNum);
-			cs.setString(4, fName);
-			cs.setString(5, lName);
+			cs.setInt(2, eid);
+			cs.setString(3, worksFor);
+			cs.setString(4, phoneNum);
+			cs.setString(5, fName);
 			cs.setString(6, lName);
-			cs.setString(7, address);
+			cs.setString(7, lName);
+			cs.setString(8, address);
 
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
 				JOptionPane.showMessageDialog(null, "ERROR: Must enter an Employee ID");
 				return 0;
-			}
+			} else if (returnValue == 2) {
+				JOptionPane.showMessageDialog(null, "ERROR: Must enter a Dealership");
+				return 0;
+			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
