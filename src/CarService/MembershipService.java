@@ -162,6 +162,9 @@ public class MembershipService {
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
 		frame.setTitle("Edit Membership");
+		
+		JTextField jID = new JTextField("ID");
+		panel.add(jID);
 
 		JTextField jCust = new JTextField("CustomerID");
 		panel.add(jCust);
@@ -182,6 +185,11 @@ public class MembershipService {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
+				int id = 0;
+				if (!jID.getText().equals("ID")) {
+					id = Integer.parseInt(jID.getText());
+				}
+				
 				int cust = 0;
 				if (!jCust.getText().equals("CustomerID")) {
 					cust = Integer.parseInt(jCust.getText());
@@ -198,7 +206,7 @@ public class MembershipService {
 					type = jType.getText();
 				}
 
-				edit(name, type, cust, manf);
+				edit(id,name, type, cust, manf);
 				frame.setVisible(false);
 			}
 
@@ -211,27 +219,28 @@ public class MembershipService {
 
 	}
 
-	public int edit(String name, String type, int customerID, String manf) {
+	public int edit(int id,String name, String type, int customerID, String manf) {
 
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call editMembership(?,?,?,?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call editMembership(?,?,?,?,?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, name);
-			cs.setString(3, type);
-			cs.setInt(4, customerID);
-			cs.setString(5, manf);
+			cs.setInt(2, id);
+			cs.setString(3, name);
+			cs.setString(4, type);
+			cs.setInt(5, customerID);
+			cs.setString(6, manf);
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR: Must enter a manufacturer name");
+				JOptionPane.showMessageDialog(null, "ERROR: Must enter an ID");
 				return 0;
 			}else if (returnValue == 2) {
-				JOptionPane.showMessageDialog(null, "ERROR: Must enter a customer name");
+				JOptionPane.showMessageDialog(null, "ERROR: Membership does not exist");
 				return 0;
 			}else if (returnValue == 3) {
-				JOptionPane.showMessageDialog(null, "ERROR: Membership does not exist");
+				JOptionPane.showMessageDialog(null, "ERROR: Customer does not exist");
 				return 0;
 			}
 		} catch (SQLException e) {
