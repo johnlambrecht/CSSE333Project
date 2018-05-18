@@ -106,8 +106,8 @@ public class CustomerService {
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, phoneNum);
 			cs.setString(3, fname);
-			cs.setString(4, minit);
-			cs.setString(5, lname);
+			cs.setString(4, lname);
+			cs.setString(5, lminit);
 			cs.setString(6, address);
 			cs.execute();
 			int returnValue = cs.getInt(1);
@@ -255,8 +255,8 @@ public class CustomerService {
 			cs.setInt(2, customerID);
 			cs.setString(3, phoneNum);
 			cs.setString(4, fname);
-			cs.setString(5, minit);
-			cs.setString(6, lname);
+			cs.setString(5, lname);
+			cs.setString(6, minit);
 			cs.setString(7, address);
 			cs.execute();
 			int returnValue = cs.getInt(1);

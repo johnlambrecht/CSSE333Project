@@ -140,7 +140,7 @@ public class SalesPersonService {
 		JTextField jEID = new JTextField("EmployeeID");
 		panel.add(jEID);
 
-		JTextField jWorksFor = new JTextField("Service Center");
+		JTextField jWorksFor = new JTextField("Dealership");
 		panel.add(jWorksFor);
 
 		JTextField jPhoneNum = new JTextField("Phone Number");
@@ -170,7 +170,7 @@ public class SalesPersonService {
 					eID = Integer.parseInt(jEID.getText());
 				}
 				String worksFor = null;
-				if (!jWorksFor.getText().equals("Service Center")) {
+				if (!jWorksFor.getText().equals("Dealership")) {
 					worksFor = jWorksFor.getText();
 				}
 
@@ -224,7 +224,7 @@ public class SalesPersonService {
 			cs.setString(4, phoneNum);
 			cs.setString(5, fName);
 			cs.setString(6, lName);
-			cs.setString(7, lName);
+			cs.setString(7, minit);
 			cs.setString(8, address);
 
 			cs.execute();
