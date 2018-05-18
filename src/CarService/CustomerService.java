@@ -107,7 +107,7 @@ public class CustomerService {
 			cs.setString(2, phoneNum);
 			cs.setString(3, fname);
 			cs.setString(4, lname);
-			cs.setString(5, lminit);
+			cs.setString(5, minit);
 			cs.setString(6, address);
 			cs.execute();
 			int returnValue = cs.getInt(1);
