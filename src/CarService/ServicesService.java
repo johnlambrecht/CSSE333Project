@@ -122,6 +122,8 @@ public class ServicesService {
 		frame.setSize(1000, 500);
 		frame.setTitle("Edit Service");
 		
+		JTextField jID = new JTextField("ID");
+		panel.add(jID);
 		
 		JTextField jVIN = new JTextField("VIN");
 		panel.add(jVIN);
@@ -141,6 +143,10 @@ public class ServicesService {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+				int id = -1;
+				if(!jID.getText().equals("ID")){
+					id = Integer.parseInt(jID.getText());
+				}
 				String vin = jVIN.getText();
 				
 				
@@ -157,7 +163,7 @@ public class ServicesService {
 				
 				
 				
-				edit(vin,name,type);
+				edit(id, vin,name,type);
 				frame.setVisible(false);
 			}
 			
@@ -170,15 +176,16 @@ public class ServicesService {
 	
 }
 
-	public int edit(String VIN, String name, String type) {
+	public int edit(int id, String VIN, String name, String type) {
 		
 		CallableStatement cs = null;
 		
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call editService(?,?,?)}" );
+			cs = this.dbService.getConnection().prepareCall("{ ? = call editService(?,?,?,?)}" );
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setString(2, VIN);
-			cs.setString(3, name);
+			cs.setInt(2, id);
+			cs.setString(3, VIN);
+			cs.setString(4, name);
 			cs.setString(5, type);
 			cs.execute();
 			int returnValue = cs.getInt(1);
@@ -193,6 +200,12 @@ public class ServicesService {
 				return 0;
 			}else if(returnValue == 4) {
 				JOptionPane.showMessageDialog(null, "ERROR: The Name or the Address is not valid");
+				return 0;
+			}else if(returnValue == 5) {
+				JOptionPane.showMessageDialog(null, "ERROR: Must enter an ID");
+				return 0;
+			}else if(returnValue == 6) {
+				JOptionPane.showMessageDialog(null, "ERROR: Service does not exist");
 				return 0;
 			}
 		} catch (SQLException e) {
