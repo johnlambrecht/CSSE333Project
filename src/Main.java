@@ -78,7 +78,7 @@ public class Main {
 		JButton addButton = new JButton("Add");
 		JButton editButton = new JButton("Edit");
 		JButton deleteButton = new JButton("Delete");
-		JButton searchButton = new JButton("Search");
+		JButton searchButton = new JButton("Search Car");
 		JButton showButton = new JButton("Show/Hide Deleted Records");
 		
 

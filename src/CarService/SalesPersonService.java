@@ -24,13 +24,10 @@ public class SalesPersonService {
 
 	public void populateFrame(JFrame frame) {
 		JPanel panel = new JPanel();
-		GridLayout layout = new GridLayout(2, 1);
+		GridLayout layout = new GridLayout(4, 2);
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
 		frame.setTitle("Add Salesperson");
-
-		JTextField jEID = new JTextField("Employee ID");
-		panel.add(jEID);
 
 		JTextField jWorksFor = new JTextField("Dealership");
 		panel.add(jWorksFor);
@@ -56,10 +53,6 @@ public class SalesPersonService {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int eID = 0;
-				if (!jEID.getText().equals("Employee ID")) {
-					eID = Integer.parseInt(jEID.getText());
-				}
 
 				String worksFor = null;
 				if (!jWorksFor.getText().equals("Dealership")) {
@@ -91,7 +84,7 @@ public class SalesPersonService {
 					address = jAddress.getText();
 				}
 
-				add(eID, worksFor, phoneNum, fName, minit, lName, address);
+				add(worksFor, phoneNum, fName, minit, lName, address);
 				frame.setVisible(false);
 			}
 
@@ -104,20 +97,19 @@ public class SalesPersonService {
 
 	}
 
-	public int add(int eID, String dealership, int phoneNum, String fName, String minit, String lName, String address) {
+	public int add(String dealership, int phoneNum, String fName, String minit, String lName, String address) {
 
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call addSalesPerson(?,?,?,?,?,?,?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call addSalesPerson(?,?,?,?,?,?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setInt(2, eID);
-			cs.setString(3, dealership);
-			cs.setInt(4, phoneNum);
-			cs.setString(5, fName);
-			cs.setString(6, lName);
-			cs.setString(7, minit);
-			cs.setString(8, address);
+			cs.setString(2, dealership);
+			cs.setInt(3, phoneNum);
+			cs.setString(4, fName);
+			cs.setString(5, lName);
+			cs.setString(6, minit);
+			cs.setString(7, address);
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
@@ -141,9 +133,6 @@ public class SalesPersonService {
 		panel.setLayout(layout);
 		frame.setSize(1000, 500);
 		frame.setTitle("Edit Membership");
-
-		JTextField jEID = new JTextField("Employee ID");
-		panel.add(jEID);
 
 		JTextField jWorksFor = new JTextField("Service Center");
 		panel.add(jWorksFor);
@@ -169,11 +158,6 @@ public class SalesPersonService {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
-				int EID = 0;
-				if (!jEID.getText().equals("Employee ID")) {
-					EID = Integer.parseInt(jEID.getText());
-				}
 
 				String worksFor = null;
 				if (!jWorksFor.getText().equals("Service Center")) {
@@ -205,7 +189,7 @@ public class SalesPersonService {
 					address = jAddress.getText();
 				}
 
-				edit(EID, worksFor, phoneNum, fName, lName, minit, address);
+				edit(worksFor, phoneNum, fName, lName, minit, address);
 				frame.setVisible(false);
 			}
 
@@ -218,20 +202,19 @@ public class SalesPersonService {
 
 	}
 
-	public int edit(int eID, String worksFor, int phoneNum, String fName, String lName, String minit, String address) {
+	public int edit(String worksFor, int phoneNum, String fName, String lName, String minit, String address) {
 
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call editSalesPerson(?,?,?,?,?,?,?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call editSalesPerson(?,?,?,?,?,?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setInt(2, eID);
-			cs.setString(3, worksFor);
-			cs.setInt(4, phoneNum);
-			cs.setString(5, fName);
+			cs.setString(2, worksFor);
+			cs.setInt(43, phoneNum);
+			cs.setString(4, fName);
+			cs.setString(5, lName);
 			cs.setString(6, lName);
-			cs.setString(7, lName);
-			cs.setString(8, address);
+			cs.setString(7, address);
 
 			cs.execute();
 			int returnValue = cs.getInt(1);

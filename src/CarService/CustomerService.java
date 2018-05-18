@@ -32,9 +32,6 @@ public class CustomerService {
 		frame.setTitle("Add Customer");
 		
 		
-		JTextField jCust = new JTextField("CustomerID");
-		panel.add(jCust);
-		
 		JTextField jPhoneNum = new JTextField("Phone Number");
 		panel.add(jPhoneNum);
 		
@@ -60,14 +57,10 @@ public class CustomerService {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				int custID = 0;
-				if(!jCust.getText().equals("CustomerID")){
-				 custID = Integer.parseInt(jCust.getText());
-				}
 				
-				int phoneNum = 0;
+				String phoneNum = null;
 				if(!jPhoneNum.getText().equals("Phone Number")){
-				 phoneNum = Integer.parseInt(jPhoneNum.getText());
+				 phoneNum = jPhoneNum.getText();
 				}
 				
 				String lName = null;
@@ -91,7 +84,7 @@ public class CustomerService {
 				}
 				
 				
-				add(custID, phoneNum, fName,minit,lName, address);
+				add(phoneNum, fName,minit,lName, address);
 				frame.setVisible(false);
 			}
 			
@@ -104,28 +97,20 @@ public class CustomerService {
 	
 }
 
-	public int add(int customerID, int phoneNum, String fname, String minit, String lname, String address) {
+	public int add(String phoneNum, String fname, String minit, String lname, String address) {
 		
 		CallableStatement cs = null;
 		
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call addCustomer(?,?,?,?,?,?)}" );
+			cs = this.dbService.getConnection().prepareCall("{ ? = call addCustomer(?,?,?,?,?)}" );
 			cs.registerOutParameter(1, Types.INTEGER);
-			cs.setInt(2, customerID);
-			cs.setInt(3, phoneNum);
-			cs.setString(4, fname);
-			cs.setString(5, minit);
-			cs.setString(6, lname);
-			cs.setString(7, address);
+			cs.setString(2, phoneNum);
+			cs.setString(3, fname);
+			cs.setString(4, minit);
+			cs.setString(5, lname);
+			cs.setString(6, address);
 			cs.execute();
 			int returnValue = cs.getInt(1);
-			if(returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR: Please enter a valid customer ID");
-				return 0;
-			}else if(returnValue == 2) {
-				JOptionPane.showMessageDialog(null, "ERROR: The customer ID already exists");
-				return 0;
-			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
