@@ -85,7 +85,7 @@ public class MembershipService {
 		CallableStatement cs = null;
 
 		try {
-			cs = this.dbService.getConnection().prepareCall("{ ? = call addMembership(?,?,?,?)}");
+			cs = this.dbService.getConnection().prepareCall("{ ? = call addMember(?,?,?,?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, name);
 			cs.setString(3, type);
@@ -94,7 +94,22 @@ public class MembershipService {
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
-				JOptionPane.showMessageDialog(null, "ERROR");
+				JOptionPane.showMessageDialog(null, "Must enter a valid CustomerID");
+				return 0;
+			}
+			if (returnValue == 2) {
+				JOptionPane.showMessageDialog(null,
+						"Must enter a valid Manufacturer");
+				return 0;
+			}
+			if (returnValue == 3) {
+				JOptionPane.showMessageDialog(null,
+						"The CustomerID does not exist");
+				return 0;
+			}
+			if (returnValue == 4) {
+				JOptionPane.showMessageDialog(null,
+						"The manufacturer " + manf + " does not exist");
 				return 0;
 			}
 		} catch (SQLException e) {
