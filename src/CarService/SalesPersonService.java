@@ -59,9 +59,9 @@ public class SalesPersonService {
 					worksFor = jWorksFor.getText();
 				}
 
-				int phoneNum = 0;
+				String phoneNum = "";
 				if (!jPhoneNum.getText().equals("Phone Number")) {
-					phoneNum = Integer.parseInt(jPhoneNum.getText());
+					phoneNum = jPhoneNum.getText();
 				}
 
 				String lName = null;
@@ -97,7 +97,7 @@ public class SalesPersonService {
 
 	}
 
-	public int add(String dealership, int phoneNum, String fName, String minit, String lName, String address) {
+	public int add(String dealership, String phoneNum, String fName, String minit, String lName, String address) {
 
 		CallableStatement cs = null;
 
@@ -105,7 +105,7 @@ public class SalesPersonService {
 			cs = this.dbService.getConnection().prepareCall("{ ? = call addSalesPerson(?,?,?,?,?,?)}");
 			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setString(2, dealership);
-			cs.setInt(3, phoneNum);
+			cs.setString(3, phoneNum);
 			cs.setString(4, fName);
 			cs.setString(5, lName);
 			cs.setString(6, minit);
