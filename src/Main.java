@@ -58,7 +58,7 @@ public class Main {
 		// creates the drop down box with an example set of strings
 		ArrayList<String> dbNames = new ArrayList<String>();
 		Statement stmt = null;
-	    String query = "USE " + DBNAME +
+	    String query = "USE " + DBNAME  +
                 " SELECT name FROM sys.tables";
 	    try {
 	        stmt = dbService.getConnection().createStatement();

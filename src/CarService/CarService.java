@@ -1,6 +1,5 @@
 package CarService;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +8,6 @@ import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -143,6 +141,9 @@ public class CarService {
 				return 0;
 			} else if (returnValue == 4) {
 				JOptionPane.showMessageDialog(null, "ERROR: The manf does not exist");
+				return 0;
+			} else if (returnValue == 5) {
+				JOptionPane.showMessageDialog(null, "ERROR: Availability must be Y or N");
 				return 0;
 			}
 		} catch (SQLException e) {
